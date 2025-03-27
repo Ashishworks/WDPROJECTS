@@ -7,5 +7,10 @@
 </head>
 <body>
     <h2>The Listing Page</h2>
+    <ul>
+        <% for(result of allresult){%>
+            <li><a href="/listing/<%=result._id%>"><%=result.title%></a></li>
+            <% } %>
+    </ul>
 </body>
 </html>

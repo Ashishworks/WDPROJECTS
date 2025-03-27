@@ -2,7 +2,11 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const listing = require("./models/listing.js")
+const path=require("path");
 
+app.set("view engine","ejs")
+app.set("views",path.join(__dirname,"views"));
+app.use(express.urlencoded({extended:true}))
 
 app.get('/', (req, res) => {
     res.send("site working");
@@ -26,7 +30,7 @@ app.listen(8080, () => {
     console.log("connected")
 })
 
-app.get("/listing",async (req, res) => {
+app.get("/listing0",async (req, res) => {
     const listing1 = new listing({
         title: "wonderland2",
         description: "beautiful place",
@@ -36,4 +40,15 @@ app.get("/listing",async (req, res) => {
     });
     await listing1.save();
     res.send("data saved")
+})
+
+app.get("/listing",async(req,res)=>{
+    let allresult=await listing.find()
+    res.render("./listing/index.ejs",{allresult})
+})
+
+app.get("/listing/:id",async(req,res)=>{
+    let {id}=req.params;
+    let singledata=await listing.findById(id);
+    res.render("./listing/show.ejs",{singledata})
 })
