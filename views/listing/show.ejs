@@ -13,5 +13,9 @@
         <li><%=singledata.location%></li>
         <li><%=singledata.country%></li>
     </ul>
+    <a href="/listing/<%=singledata._id%>/edit">EDIT</a>
+    <form method="post" action="/listing/<%=singledata._id%>?_method=DELETE">
+        <button>DELETE</button>
+    </form>
 </body>
 </html>

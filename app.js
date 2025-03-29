@@ -3,10 +3,12 @@ const app = express();
 const mongoose = require("mongoose");
 const listing = require("./models/listing.js")
 const path=require("path");
+const methodOverride=require("method-override");
 
 app.set("view engine","ejs")
 app.set("views",path.join(__dirname,"views"));
 app.use(express.urlencoded({extended:true}))
+app.use(methodOverride("_method"));
 
 app.get('/', (req, res) => {
     res.send("site working");
@@ -47,8 +49,38 @@ app.get("/listing",async(req,res)=>{
     res.render("./listing/index.ejs",{allresult})
 })
 
+app.get("/listing/new",(req,res)=>{
+    res.render("./listing/new.ejs")
+})
+
+app.post("/listing",async(req,res)=>{
+    const listing1=new listing(req.body.listing);
+    await listing1.save();
+    res.redirect("/listing");
+})
+
+
 app.get("/listing/:id",async(req,res)=>{
     let {id}=req.params;
     let singledata=await listing.findById(id);
     res.render("./listing/show.ejs",{singledata})
+})
+
+app.get("/listing/:id/edit",async(req,res)=>{
+    let {id}=req.params;
+    let singledata=await listing.findById(id);
+    res.render("./listing/edit.ejs",{singledata})
+})
+
+app.put("/listing/:id",async(req,res)=>{
+    let {id}=req.params;
+    await listing.findByIdAndUpdate(id,{...req.body.listing});
+    res.redirect(`/listing/${id}`)
+})
+
+app.delete("/listing/:id",async(req,res)=>{
+    let {id}=req.params;
+    let del=await listing.findByIdAndDelete(id);
+    console.log(del);
+    res.redirect("/listing");
 })
