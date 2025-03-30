@@ -1,0 +1,17 @@
+body{
+    background-color: lightskyblue;
+}
+
+.navbar{
+    background-color: white;
+    height: 4.5rem;
+}
+
+.fa-compass{
+    color: #fe424d;
+    font-size: 2rem;
+}
+
+.nav-link{
+    color: #222222 !important;
+}
