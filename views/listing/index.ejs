@@ -1,9 +1,19 @@
 <% layout("/layouts/boilerplate") %>
 <body>
     <h2>The Listing Page</h2>
-    <ul>
+    <div class="cars row row-cols-lg-3 row-cols-md-2 row-cols-sm-1">
         <% for(result of allresult){%>
-            <li><a href="/listing/<%=result._id%>"><%=result.title%></a></li>
-            <% } %>
-    </ul>
+        <div class="card col" style="width: 18rem;">
+            <a href="/listing/<%=result._id%>" class="listing-link">
+            <img src="<%=result.image%>" class="card-img-top" alt="listing image" style="height: 18rem;">
+            <div class="card-img-overlay">
+              </div>
+            <div class="card-body">
+              <p class="card-text"><b><%=result.title%></b></p>
+              <p class="card-text">&#8377;<%=result.price.toLocaleString("en-IN")%>/night</p>
+            </a>
+            </div>
+          </div>
+          <% } %>
+    </div>
 </body>

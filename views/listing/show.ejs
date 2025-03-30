@@ -1,6 +1,7 @@
 <% layout("/layouts/boilerplate") %>
 <body>
     <h2><%=singledata.title%></h2>
+    <img src="<%=singledata.image%>" class="show-img">
     <ul>
         <li><%=singledata.description%></li>
         <li>&#8377;<%=singledata.price.toLocaleString("en-IN")%></li>

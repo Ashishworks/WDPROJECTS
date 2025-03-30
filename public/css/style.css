@@ -1,5 +1,18 @@
 body{
     background-color: lightskyblue;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Full viewport height */
+    margin: 0;
+    font-family: "Plus Jakarta Sans", sans-serif !important;
+    font-optical-sizing: auto !important;
+    font-weight: 400 !important;
+    font-style: normal !important;
+    color: black !important;
+}
+
+.container {
+    flex: 1; /* Takes up remaining space */
 }
 
 .navbar{
@@ -14,4 +27,66 @@ body{
 
 .nav-link{
     color: #222222 !important;
+}
+
+.content{
+    flex: 1;
+}
+.footer{
+    text-align: center;
+    background-color: #ebebeb;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+.fa-brands{
+    font-size: 1.3rem;
+    margin: 0.2rem;
+    transition: transform 0.1s ease-in-out;
+}
+
+.fa-brands:hover{
+    transform: scale(1.1);
+}
+
+.privacy:hover, .copyright:hover{
+    text-decoration: underline;   
+}
+
+.card{
+    border: none !important;
+    margin-bottom: 2rem;
+}
+
+.card-img-top{
+    border-radius: 2rem !important;
+    width: 100% !important;
+    object-fit: cover !important;
+}
+
+.card-body{
+    padding: 0 !important;
+}
+
+.listing-link{
+    text-decoration: none;
+    color: black;
+}
+
+.card-text{
+    margin-bottom: 0 !important;
+}
+
+.card-img-overlay:hover{
+    background-color: white;
+    opacity: 0.2;
+}
+
+.show-img{
+    width: 20%;
+    height: 20%;
+    border: solid 2px black;
+    border-radius: 2rem;
+    
 }
