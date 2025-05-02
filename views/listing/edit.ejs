@@ -1,12 +1,54 @@
 <% layout("/layouts/boilerplate") %>
-<body>
-    <form method="post" action="/listing/<%=singledata._id%>?_method=PUT">
-        <input type="text" placeholder="Enter title" name="listing[title]" value=<%=singledata.title%>><br>
-        <textarea placeholder="Enter description" name="listing[description]"><%=singledata.description%></textarea><br>
-        <input type="text" placeholder="Enter image url" name="listing[image]" value=<%=singledata.image%>><br>
-        <input type="number" placeholder="Enter price" name="listing[price]" value=<%=singledata.price%>><br>
-        <input type="text" placeholder="Enter location" name="listing[location]"  value=<%=singledata.location%>><br>
-        <input type="text" placeholder="Enter country" name="listing[country]"  value=<%=singledata.country%>><br>
-        <button>SUBMIT</button>
-    </form>
-</body>
+    <body>
+        <div class="row mt-5 offset-2">
+            <h3>Edit Credentials</h3>
+            <br>
+            <br>
+            <div class="col-10">
+                <form method="post" action="/listing/<%=singledata._id%>?_method=PUT" novalidate class="needs-validation">
+                    <div class="div">
+                        <label for="title" class="form-label">Title</label>
+                        <input type="text" placeholder="Enter title" name="listing[title]" value=<%=singledata.title%>
+                        class="form-control" required>
+                        <div class="invalid-feedback">Enter a valid Title</div>
+                        <br>
+                    </div>
+                    <div class="div">
+                        <label for="des" class="form-label">Description</label>
+                        <textarea placeholder="Enter description" name="listing[description]" class="form-control"
+                            required><%=singledata.description%></textarea>
+                        <div class="invalid-feedback">Write a short description</div><br>
+                    </div>
+                    <div class="div">
+                        <label for="img" class="form-label">Image URL/Link</label>
+                        <input type="text" placeholder="Enter image url" name="listing[image]"
+                            value=<%=singledata.image%> class="form-control" required>
+                        <div class="invalid-feedback">Enter a valid url</div><br>
+                    </div>
+                    <div class="row">
+                        <div class="div col-4">
+                            <label for="price" class="form-label">Price</label>
+                            <input type="number" placeholder="Enter price" name="listing[price]"
+                                value=<%=singledata.price%> class="form-control" required>
+                            <div class="invalid-feedback">Enter a valid price</div><br>
+                        </div>
+                        <div class="div col-8">
+                            <label for="country" class="form-label">Country</label>
+                            <input type="text" placeholder="Enter country" name="listing[country]"
+                                value=<%=singledata.country%> class="form-control" required>
+                            <div class="invalid-feedback">Enter a valid country</div><br>
+                        </div>
+                    </div>
+                    <div class="div">
+                        <label for="location" class="form-label">Location</label>
+                        <input type="text" placeholder="Enter location" name="listing[location]"
+                            value=<%=singledata.location%> class="form-control" required>
+                        <div class="invalid-feedback">Enter a valid location</div><br>
+                    </div>
+                    <button class="btn btn-outline-danger">Edit</button>
+                    <br>
+                    <br>
+                </form>
+            </div>
+        </div>
+    </body>

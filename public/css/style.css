@@ -83,10 +83,13 @@ body{
     opacity: 0.2;
 }
 
-.show-img{
-    width: 20%;
-    height: 20%;
-    border: solid 2px black;
-    border-radius: 2rem;
+/* .show-img{
     
+} */
+
+.show-card{
+    border-radius: 1rem !important;
+    height: 40vh;
+    object-fit: cover;
+    border: 1px solid black;
 }
