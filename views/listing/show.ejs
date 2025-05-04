@@ -2,32 +2,29 @@
 
     <body>
         <div class="row">
-            <h2 class="col-6 offset-3 pt-4">Listing Details</h2>
+            <h2 class="col-6 offset-3 pt-4">
+                <%=singledata.title%>
+            </h2>
             <div class="col-6 offset-3 p-0">
                 <div class="card">
                     <img src="<%=singledata.image%>" class="show-card">
                 </div>
             </div>
         </div>
-            <div class="row">
-                <div class="card-body col-6 offset-3">
-                    <b>
-                        <p class="card-text mb-1" style="font-size: larger;">
-                            <%=singledata.title%>
-                        </p>
-                    </b>
-                    <p class="mb-1 col-8">
-                        <%=singledata.description%>
-                    </p>
-                    <p class="mb-0">&#8377;<%=singledata.price.toLocaleString("en-IN")%></p>
-                    <p class="mb-0">
-                        <%=singledata.location%>
-                    </p>
-                    <p>
-                        <%=singledata.country%>
-                    </p>
-                </div>
+        <div class="row">
+            <div class="card-body col-6 offset-3">
+                <p class="mb-1 col-8">
+                    <%=singledata.description%>
+                </p>
+                <p class="mb-0">&#8377;<%=singledata.price.toLocaleString("en-IN")%></p>
+                <p class="mb-0">
+                    <%=singledata.location%>
+                </p>
+                <p>
+                    <%=singledata.country%>
+                </p>
             </div>
+        </div>
         <div class="row">
             <div class="col-1 offset-3 p-0">
                 <a href="/listing/<%=singledata._id%>/edit" class="btn btn-outline-success">EDIT</a>
@@ -39,4 +36,22 @@
             </form>
             <br>
             <br>
+        </div>
+        <div class="row"> 
+            <div class="col-6 offset-3 pb-4">
+                <hr>
+            <h4>Leave a Review</h4>
+            <form method="post" action="/listing/<%=singledata._id%>/reviews">
+                <div>
+                    <label for="rating" class="form-label">Rating</label>
+                    <input type="range" min="1" max="5" class="form-range" id="rating" name="review[rating]">
+                </div>
+                <div>
+                    <label class="mb-2">Comments</label>
+                    <textarea class="form-control mb-4 " rows="5" placeholder="Describe your experience" name="review[comment]"></textarea>
+                    <button class="btn btn-outline-dark">Submit</button>
+                </div>
+            </form>
+        </div>
+        </div>
     </body>
