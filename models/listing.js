@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 const schema = mongoose.Schema;
+const Review=require("./review.js");
+const { listingSchema } = require("../schema");
 
 const lschema = new schema({
     title: {
@@ -31,7 +33,14 @@ const lschema = new schema({
         type: schema.Types.ObjectId,
         ref: "Review",
     },],
-})
+});
+
+// mongoose middleware
+lschema.post("findOneAndDelete",async(listing)=>{
+    if(listing){
+        await Review.deleteMany({_id: {$in: listing.review}});
+    }
+});
 const listing = mongoose.model("listing", lschema);
 
 module.exports = listing;

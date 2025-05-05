@@ -7,7 +7,7 @@ const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate")
 const wrapAsync = require("./utils/wrapAsync");
 const ExpressError = require("./utils/ExpressError.js");
-const { listingSchema } = require("./schema.js");
+const { listingSchema, reviewSchema } = require("./schema.js");
 const Review=require("./models/review.js");
 
 app.set("view engine", "ejs")
@@ -61,6 +61,16 @@ const validateListing = (req, res, next) => {
     }
 }
 
+const validateReview = (req, res, next) => {
+    let {error} = reviewSchema.validate(req.body);
+    if (error) {
+        let errMsg=error.details.map((el)=>el.message).join("");
+        throw new ExpressError(400,errMsg);
+    }else{
+        next();
+    }
+}
+
 // Index route
 app.get("/listing", async (req, res) => {
     let allresult = await listing.find()
@@ -98,7 +108,7 @@ app.post("/listing",validateListing, wrapAsync(async (req, res, next) => {
 //Show Route
 app.get("/listing/:id", wrapAsync(async (req, res) => {
     let { id } = req.params;
-    let singledata = await listing.findById(id);
+    let singledata = await listing.findById(id).populate("review");
     res.render("./listing/show.ejs", { singledata })
 }))
 
@@ -125,7 +135,7 @@ app.delete("/listing/:id", wrapAsync(async (req, res) => {
 }))
 
 //Review Post Route
-app.post("/listing/:id/reviews",async(req,res)=>{
+app.post("/listing/:id/reviews",wrapAsync(async(req,res)=>{
     let Listing=await listing.findById(req.params.id); 
     let newReview=new Review(req.body.review);
     Listing.review.push(newReview);
@@ -134,7 +144,18 @@ app.post("/listing/:id/reviews",async(req,res)=>{
     await Listing.save();
     console.log("review saved")
     res.redirect(`/listing/${Listing._id}`)
-},)
+},))
+
+
+//Delete Route
+app.delete("/listing/:id/reviews/:reviewId",wrapAsync(async(req,res)=>{
+    let {id,reviewId}=req.params;
+    console.log(id,reviewId);
+    await listing.findByIdAndUpdate(id,{$pull: {review: reviewId}});
+    let m=await Review.findByIdAndDelete(reviewId);
+    console.log(m);
+    res.redirect(`/listing/${id}`)
+}));
 
 
 

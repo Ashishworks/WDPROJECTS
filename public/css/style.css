@@ -93,3 +93,8 @@ body{
     object-fit: cover;
     border: 1px solid black;
 }
+
+.revCard{
+    border: 0.3px solid grey !important;
+    padding: 5px;
+}

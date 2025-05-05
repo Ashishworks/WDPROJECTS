@@ -37,21 +37,47 @@
             <br>
             <br>
         </div>
-        <div class="row"> 
+        <div class="row">
             <div class="col-6 offset-3 pb-4">
                 <hr>
-            <h4>Leave a Review</h4>
-            <form method="post" action="/listing/<%=singledata._id%>/reviews">
-                <div>
-                    <label for="rating" class="form-label">Rating</label>
-                    <input type="range" min="1" max="5" class="form-range" id="rating" name="review[rating]">
+                <h4>Leave a Review</h4>
+                <form method="post" action="/listing/<%=singledata._id%>/reviews" novalidate class="needs-validation">
+                    <div>
+                        <label for="rating" class="form-label">Rating</label>
+                        <input type="range" min="1" max="5" class="form-range" id="rating" name="review[rating]">
+                    </div>
+                    <div>
+                        <label class="mb-2">Comments</label>
+                        <textarea class="form-control " rows="5" placeholder="Describe your experience"
+                            name="review[comment]" required></textarea>
+                        <div class="invalid-feedback">Please add a comment</div>
+                        <br>
+                        <button class="btn btn-outline-dark">Submit</button>
+                    </div>
+                </form>
+                <hr>
+                <div class="row">
+                    <h4>All Reviews</h4>
+                    <br>
+                    <br>    
+                    <% for(r of singledata.review){ %>
+                        <div class="card revCard me-3" style="width: 18rem;">
+                            <div class="card-body">
+                                <h5 class="card-title">John</h5>
+                                <p class="card-text">
+                                    <%=r.comment%>
+                                </p>
+                                <p class="card-text">
+                                    <%=r.rating%>Stars
+                                </p>
+                                <br>
+                                <form action="/listing/<%=singledata._id%>/reviews/<%=r._id%>?_method=DELETE" method="POST">
+                                    <button class="btn btn-dark btn-sm">Delete</button>
+                                </form>
+                            </div>
+                        </div>
+                        <%}%>
                 </div>
-                <div>
-                    <label class="mb-2">Comments</label>
-                    <textarea class="form-control mb-4 " rows="5" placeholder="Describe your experience" name="review[comment]"></textarea>
-                    <button class="btn btn-outline-dark">Submit</button>
-                </div>
-            </form>
-        </div>
+            </div>
         </div>
     </body>
