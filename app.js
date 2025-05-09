@@ -50,9 +50,10 @@ passport.deserializeUser(User.deserializeUser());
 app.use((req,res,next)=>{
     res.locals.success=req.flash("success");
     res.locals.error=req.flash("error");
+    res.locals.currUser=req.user; // cuz we can't access req.user() directly in ejs
     next();
 });
-
+ 
 
 app.use("/listing",listingRouter);
 app.use("/listing/:id/reviews",reviewRouter);
