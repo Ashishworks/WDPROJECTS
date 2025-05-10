@@ -38,7 +38,7 @@ const lschema = new schema({
         type: schema.Types.ObjectId,
         ref:"user",
     }
-});
+}); 
 
 // mongoose middleware
 lschema.post("findOneAndDelete",async(listing)=>{
