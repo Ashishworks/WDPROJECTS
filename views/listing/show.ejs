@@ -13,6 +13,7 @@
         </div>
         <div class="row">
             <div class="card-body col-6 offset-3">
+                <p class="mb-0"><i><b>Owned by <%=singledata.owner.username%></b></i></p>
                 <p class="mb-1 col-8">
                     <%=singledata.description%>
                 </p>
@@ -25,6 +26,7 @@
                 </p>
             </div>
         </div>
+        <%if(currUser && currUser._id.equals(singledata.owner._id)){%>
         <div class="row">
             <div class="col-1 offset-3 p-0">
                 <a href="/listing/<%=singledata._id%>/edit" class="btn btn-outline-success">EDIT</a>
@@ -37,6 +39,7 @@
             <br>
             <br>
         </div>
+        <%}%>
         <div class="row">
             <div class="col-6 offset-3 pb-4">
                 <hr>
@@ -59,7 +62,7 @@
                 <div class="row">
                     <h4>All Reviews</h4>
                     <br>
-                    <br>    
+                    <br>
                     <% for(r of singledata.review){ %>
                         <div class="card revCard me-3" style="width: 18rem;">
                             <div class="card-body">
@@ -71,7 +74,8 @@
                                     <%=r.rating%>Stars
                                 </p>
                                 <br>
-                                <form action="/listing/<%=singledata._id%>/reviews/<%=r._id%>?_method=DELETE" method="POST">
+                                <form action="/listing/<%=singledata._id%>/reviews/<%=r._id%>?_method=DELETE"
+                                    method="POST">
                                     <button class="btn btn-dark btn-sm">Delete</button>
                                 </form>
                             </div>

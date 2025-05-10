@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const schema = mongoose.Schema;
 const Review=require("./review.js");
 const { listingSchema } = require("../schema");
+const { ref } = require("joi");
 
 const lschema = new schema({
     title: {
@@ -33,6 +34,10 @@ const lschema = new schema({
         type: schema.Types.ObjectId,
         ref: "Review",
     },],
+    owner:{
+        type: schema.Types.ObjectId,
+        ref:"user",
+    }
 });
 
 // mongoose middleware
