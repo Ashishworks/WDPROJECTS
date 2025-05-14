@@ -64,9 +64,7 @@ app.use("/listing/:id/reviews",reviewRouter);
 app.use("/",userRouter);
 
 
-app.get('/', (req, res) => {
-    res.send("site working");
-})
+
 
 const MONGO_URL = 'mongodb://127.0.0.1:27017/wanderlust';
 

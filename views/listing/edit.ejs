@@ -5,7 +5,7 @@
             <br>
             <br>
             <div class="col-10">
-                <form method="post" action="/listing/<%=singledata._id%>?_method=PUT" novalidate class="needs-validation">
+                <form method="post" action="/listing/<%=singledata._id%>?_method=PUT" novalidate class="needs-validation" enctype="multipart/form-data">
                     <div class="div">
                         <label for="title" class="form-label">Title</label>
                         <input type="text" placeholder="Enter title" name="listing[title]" value=<%=singledata.title%>
@@ -19,10 +19,14 @@
                             required><%=singledata.description%></textarea>
                         <div class="invalid-feedback">Write a short description</div><br>
                     </div>
+                    <div>
+                        Original Image Image<br>
+                        <img src="<%=originalImageUrl%>">
+                    </div>
                     <div class="div">
-                        <label for="img" class="form-label">Image URL/Link</label>
-                        <input type="text" placeholder="Enter image url" name="listing[image]"
-                            value=<%=singledata.image%> class="form-control" required>
+                        <label for="img" class="form-label">Upload New Image</label>
+                        <input type="file" placeholder="Enter image url" name="listing[image]"
+                             class="form-control">
                         <div class="invalid-feedback">Enter a valid url</div><br>
                     </div>
                     <div class="row">

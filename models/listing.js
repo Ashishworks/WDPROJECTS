@@ -14,9 +14,8 @@ const lschema = new schema({
         required: true
     },
     image: {
-        type: Object,
-        default: "https://cdn.pixabay.com/photo/2023/04/19/09/34/flower-7937334_1280.jpg",
-        set: (v) => v === "" ? "https://cdn.pixabay.com/photo/2023/04/19/09/34/flower-7937334_1280.jpg" : v
+        url: String,
+        filename: String
     },
     price: {
         type: Number,
