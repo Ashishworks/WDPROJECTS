@@ -13,6 +13,7 @@ module.exports.renderNewForm= (req, res) => {
 module.exports.showListing=async (req, res) => {
     let { id } = req.params;
     const singledata = await Listing.findById(id).populate({path: "review", populate:{path:"author"},}).populate("owner");
+    console.log(singledata);
     if(!singledata){
         req.flash("error","Listing You Requested for doesn't exist");
         res.redirect("/listing");

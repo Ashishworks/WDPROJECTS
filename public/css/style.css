@@ -78,10 +78,6 @@ body{
     margin-bottom: 0 !important;
 }
 
-.card-img-overlay:hover{
-    background-color: white;
-    opacity: 0.2;
-}
 
 /* .show-img{
     
@@ -105,4 +101,15 @@ body{
     height: 500px;
     width: 130vh;
     margin: auto;
+}
+
+.card.col {
+    transition: transform 0.3s ease, z-index 0.3s ease;
+    z-index: 1;
+    position: relative;
+}
+
+.card.col:hover {
+    transform: scale(1.05);
+    z-index: 10;
 }
