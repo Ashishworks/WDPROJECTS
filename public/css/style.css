@@ -98,3 +98,11 @@ body{
     border: 0.3px solid grey !important;
     padding: 5px;
 }
+
+#map{
+    border: 1.5px solid black;
+    border-radius: 2rem;
+    height: 500px;
+    width: 130vh;
+    margin: auto;
+}
