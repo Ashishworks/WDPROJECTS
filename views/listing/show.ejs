@@ -26,6 +26,23 @@
                 </p>
             </div>
         </div>
+        <div class="booking-section mt-4 p-3 border rounded bg-light shadow-sm">
+            <h5 class="mb-3 text-center">Book Your Stay</h5>
+            <form id="booking-form" class="row g-3 align-items-center justify-content-center">
+                <div class="col-auto">
+                    <label for="nights" class="col-form-label">Number of Nights</label>
+                </div>
+                <div class="col-auto">
+                    <input type="number" id="nights" name="nights" min="1" max="14" value="1" class="form-control"
+                        style="width: 80px;" required />
+                </div>
+                <div class="col-auto">
+                    <button type="submit" id="book-btn" class="btn btn-primary">Book Now</button>
+                </div>
+            </form>
+            <small class="text-muted d-block mt-2 text-center">Max 14 nights per booking</small>
+        </div>
+
         <%if(currUser && currUser._id.equals(singledata.owner._id)){%>
             <div class="row">
                 <div class="col-1 offset-3 p-0">
@@ -41,7 +58,7 @@
             </div>
             <%}%>
                 <div class="row">
-                    <div class="col-6 offset-3 pb-4">
+                    <div class="col-10 offset-1 pb-4">
                         <hr>
                         <% if(currUser){%>
                             <h4>Leave a Review</h4>
@@ -138,5 +155,61 @@
                     showMap(locationName);
                 </script>
                 <br>
+                <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+                <script>
+                    document.getElementById('booking-form').addEventListener('submit', async function (e) {
+                        e.preventDefault();  
+
+                        const nights = parseInt(document.getElementById('nights').value);
+                        if (nights < 1 || nights > 14) {
+                            alert('Please select nights between 1 and 14.');
+                            return;
+                        }
+
+                        
+                        const price = Number("<%= singledata.price %>");
+                        const amount = price * nights;
+                        
+
+                        
+                        const response = await fetch('/create-order', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ amount: amount }),
+                        });
+                        console.log(amount);
+                        if (!response.ok) {
+                            alert('Failed to create payment order. Please try again.');
+                            return;
+                        }
+
+                        const order = await response.json();
+
+                        const options = {
+                            key: '<%= razorpayKey %>', 
+                            amount: order.amount,
+                            currency: order.currency,
+                            name: 'WanderLust By Ashish',
+                            description: `Booking for ${nights} night(s)`,
+                            order_id: order.id,
+                            handler: function (response) {
+                                alert('Payment successful! Payment ID: ' + response.razorpay_payment_id);
+
+                                
+                            },
+                            prefill: {
+                                name: '<%= currUser ? currUser.username : "" %>',
+                                email: '', 
+                                contact: '', 
+                            },
+                            theme: {
+                                color: '#3399cc',
+                            },
+                        };
+
+                        const rzp = new Razorpay(options);
+                        rzp.open();
+                    });
+                </script>
 
     </body>

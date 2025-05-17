@@ -2,7 +2,6 @@ if(process.env.NODE_ENV!="production"){
     require("dotenv").config();
 }
 
-
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
@@ -10,6 +9,8 @@ const path = require("path");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const ExpressError = require("./utils/ExpressError.js");
+const paymentRoutes = require('./routes/paymentRoutes');
+
 
 const listingRouter=require("./routes/listing.js");
 const reviewRouter=require("./routes/review.js");
@@ -22,9 +23,12 @@ const passport=require("passport");
 const localStrategy=require("passport-local");
 const User=require("./models/user.js");
 
+
 app.set("view engine", "ejs")
 app.set("views", path.join(__dirname, "views"));
-app.use(express.urlencoded({ extended: true }))
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
 app.use(methodOverride("_method"));
 app.engine('ejs', ejsMate)
 app.use(express.static(path.join(__dirname, "/public")));
@@ -78,6 +82,7 @@ app.use((req,res,next)=>{
 app.use("/listing",listingRouter);
 app.use("/listing/:id/reviews",reviewRouter);
 app.use("/",userRouter);
+app.use("/", paymentRoutes);
 
 
 

@@ -1,4 +1,5 @@
 const Listing = require("../models/listing.js");
+require("dotenv").config({ path: "../.env" });
 
 
 module.exports.index=async(req, res) => {
@@ -13,12 +14,14 @@ module.exports.renderNewForm= (req, res) => {
 module.exports.showListing=async (req, res) => {
     let { id } = req.params;
     const singledata = await Listing.findById(id).populate({path: "review", populate:{path:"author"},}).populate("owner");
-    console.log(singledata);
+    
     if(!singledata){
         req.flash("error","Listing You Requested for doesn't exist");
         res.redirect("/listing");
-    }
-    res.render("./listing/show.ejs", { singledata })
+    };
+    res.render("./listing/show.ejs", { singledata, 
+  currUser: req.user, 
+  razorpayKey: process.env.RAZORPAY_KEY_ID })
 };
 
 module.exports.createListing=async (req, res, next) => {
