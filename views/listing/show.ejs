@@ -11,21 +11,37 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="card-body col-6 offset-3">
-                <p class="mb-0"><i><b>Owned by @<%=singledata.owner.username%></b></i></p>
-                <p class="mb-1 col-8">
-                    <%=singledata.description%>
+        <div class="row justify-content-center mt-4">
+            <div class="col-12 col-md-6 card p-4 shadow-sm">
+                <p class="mb-1 fst-italic fw-semibold">Owned by <span class="text-primary">@<%=
+                            singledata.owner.username %></span></p>
+                <p class="mb-3">
+                    <%= singledata.description %>
                 </p>
-                <p class="mb-0">&#8377;<%=singledata.price.toLocaleString("en-IN")%></p>
+                <p class="mb-1 fs-5 fw-bold">&#8377; <%= singledata.price.toLocaleString("en-IN") %>
+                </p>
+                <p class="mb-0"><i class="bi bi-geo-alt-fill"></i>
+                    <%= singledata.location %>
+                </p>
                 <p class="mb-0">
-                    <%=singledata.location%>
-                </p>
-                <p>
-                    <%=singledata.country%>
+                    <%= singledata.country %>
                 </p>
             </div>
         </div>
+        <%if(currUser && currUser._id.equals(singledata.owner._id)){%>
+            <div class="row">
+                <div class="col-1 offset-3 p-0">
+                    <a href="/listing/<%=singledata._id%>/edit" class="btn btn-success">EDIT</a>
+                </div>
+                <div class="col-2 p-0">
+                    <form method="post" action="/listing/<%=singledata._id%>?_method=DELETE">
+                        <button class="btn btn-danger">DELETE</button>
+                </div>
+                </form>
+                <br>
+                <br>
+            </div>
+            <%}%>
         <div class="booking-section mt-4 p-3 border rounded bg-light shadow-sm">
             <h5 class="mb-3 text-center">Book Your Stay</h5>
             <form id="booking-form" class="row g-3 align-items-center justify-content-center">
@@ -43,23 +59,9 @@
             <small class="text-muted d-block mt-2 text-center">Max 14 nights per booking</small>
         </div>
 
-        <%if(currUser && currUser._id.equals(singledata.owner._id)){%>
-            <div class="row">
-                <div class="col-1 offset-3 p-0">
-                    <a href="/listing/<%=singledata._id%>/edit" class="btn btn-outline-success">EDIT</a>
-                </div>
-                <div class="col-2 p-0">
-                    <form method="post" action="/listing/<%=singledata._id%>?_method=DELETE">
-                        <button class="btn btn-outline-danger">DELETE</button>
-                </div>
-                </form>
-                <br>
-                <br>
-            </div>
-            <%}%>
+        
                 <div class="row">
                     <div class="col-10 offset-1 pb-4">
-                        <hr>
                         <% if(currUser){%>
                             <h4>Leave a Review</h4>
                             <form method="post" action="/listing/<%=singledata._id%>/reviews" novalidate
@@ -158,7 +160,7 @@
                 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
                 <script>
                     document.getElementById('booking-form').addEventListener('submit', async function (e) {
-                        e.preventDefault();  
+                        e.preventDefault();
 
                         const nights = parseInt(document.getElementById('nights').value);
                         if (nights < 1 || nights > 14) {
@@ -166,12 +168,12 @@
                             return;
                         }
 
-                        
+
                         const price = Number("<%= singledata.price %>");
                         const amount = price * nights;
-                        
 
-                        
+
+
                         const response = await fetch('/create-order', {
                             method: 'POST',
                             headers: { 'Content-Type': 'application/json' },
@@ -186,7 +188,7 @@
                         const order = await response.json();
 
                         const options = {
-                            key: '<%= razorpayKey %>', 
+                            key: '<%= razorpayKey %>',
                             amount: order.amount,
                             currency: order.currency,
                             name: 'WanderLust By Ashish',
@@ -195,12 +197,12 @@
                             handler: function (response) {
                                 alert('Payment successful! Payment ID: ' + response.razorpay_payment_id);
 
-                                
+
                             },
                             prefill: {
                                 name: '<%= currUser ? currUser.username : "" %>',
-                                email: '', 
-                                contact: '', 
+                                email: '',
+                                contact: '',
                             },
                             theme: {
                                 color: '#3399cc',
