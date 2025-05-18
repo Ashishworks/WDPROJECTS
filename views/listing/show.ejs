@@ -42,6 +42,7 @@
                 <br>
             </div>
             <%}%>
+            <% if(currUser){%>
                 <div class="booking-section mt-4 p-3 mb-5 border rounded bg-light shadow-sm">
                     <h5 class="mb-3 text-center">Book Your Stay</h5>
                     <form id="booking-form" class="row g-3 align-items-center justify-content-center">
@@ -58,7 +59,7 @@
                     </form>
                     <small class="text-muted d-block mt-2 text-center">Max 14 nights per booking</small>
                 </div>
-
+            <%}%>
 
 
                 <h4 style="text-align: center; margin-bottom: 20px;">Where you'll be?</h4>
