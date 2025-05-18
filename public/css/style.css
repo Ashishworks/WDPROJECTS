@@ -63,6 +63,9 @@ body{
     border-radius: 2rem !important;
     width: 100% !important;
     object-fit: cover !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.75);
+    transition: box-shadow 0.3s ease;
+    margin-bottom: 7px;
 }
 
 .card-body{
@@ -76,6 +79,7 @@ body{
 
 .card-text{
     margin-bottom: 0 !important;
+    margin-left: 20px;
 }
 
 
@@ -107,6 +111,7 @@ body{
     transition: transform 0.3s ease, z-index 0.3s ease;
     z-index: 1;
     position: relative;
+    margin-left: 10px;
 }
 
 .card.col:hover {
@@ -116,12 +121,64 @@ body{
 
 
 
-.nav-link i {
+.compi i {
   display: inline-block; /* required for transform */
   transition: transform 1.5s ease;
 }
 
-.nav-link:hover i {
+.compi:hover i {
   transform: rotate(1080deg); /* 3 full rotations */
 }
 
+body {
+  position: relative;
+  margin: 0;
+  height: 100vh;
+}
+
+body::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  background-image: url('travel-pattern.png');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.05; /* Change this to control image transparency */
+  z-index: -1;  /* Place it behind content */
+}
+
+
+.search-box::placeholder {
+  text-align: center; /* Centers placeholder text */
+}
+
+
+.airbnb-home{
+    opacity: 0.65;
+}
+
+.airbnb-home:hover{
+    opacity: 1;
+}
+
+.booking-section{
+    margin-left: 130px;
+    margin-right: 130px;
+}
+
+
+.airbnb-home i {
+  visibility: hidden;
+  opacity: 0;
+  margin-right: 6px;
+  transition: opacity 0.3s ease;
+}
+
+.airbnb-home:hover i {
+  visibility: visible;
+  opacity: 1;
+}

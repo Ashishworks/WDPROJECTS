@@ -1,5 +1,5 @@
 <style>
-  .search-btn{
+  .search-btn {
     margin-left: 0.5rem;
     color: white;
     background-color: #fe424d;
@@ -7,52 +7,56 @@
     width: 6.5rem;
 
   }
-  .search-btn:hover{
+
+  .search-btn:hover {
     color: white;
     background-color: #fe424d;
   }
-  .search-box{
+
+  .search-box {
     margin-left: 5rem;
     width: 17rem;
     border-radius: 2rem;
   }
-  
 </style>
 <nav class="navbar navbar-expand-md bg-body-tertiary sticky-top border-bottom">
   <div class="container-fluid">
-    <a class="nav-link d-flex align-items-center" href="/listing">
-  <i class="fa-regular fa-compass me-4"></i> <!-- icon with margin-right -->
-  Explore
-</a>
+    <a class="nav-link d-flex align-items-center compi" href="/listing">
+      <i class="fa-regular fa-compass me-4"></i> <!-- icon with margin-right -->
+      Explore
+    </a>
 
-      <div class="navbar-nav ms-auto">
-        <form class="d-flex" role="search">
-        <input class="form-control me-2 search-box" type="search" placeholder="Search Destination" aria-label="Search"/>
-        <button class="btn search-btn" type="submit">  <i class="fa-solid fa-magnifying-glass"></i>  Search</button>
+    <div class="navbar-nav ms-auto">
+      <form class="d-flex" role="search">
+        <input class="form-control me-2 search-box" type="search" placeholder="Search Destination"
+          aria-label="Search" />
+        <button class="btn search-btn" type="submit"> <i class="fa-solid fa-magnifying-glass"></i> Search</button>
       </form>
-      </div>
-      <div class="navbar-nav ms-auto">
-        <a class="nav-link" href="/listing/new">Airbnb Your Home</a>
-        <% if(!currUser){%>
-          <a class="nav-link" href="/signup"><b>Signup</b></a>
-          <a class="nav-link btn btn-outline-danger log" href="/login"><b>Login</b></a>
-          <style>
-            .log:hover{
-              background-color:#fe424d !important;
-              color: white !important;
-            }
-          </style>
-          <%}%>
-            <% if(currUser){%>
-              <a class="nav-link btn btn-outline-danger log" href="/logout">Logout</a>
-              <style>
-            .log:hover{
-              background-color: #fe424d !important;
-              color: white !important;
-            }
-          </style>
-              <%}%>
-      </div>
+    </div>
+    <div class="navbar-nav ms-auto">
+      <a class="nav-link airbnb-home homi" href="/listing/new">
+        <i class="fa-solid fa-house-user"></i>
+        Airbnb Your Home
+      </a>
+      <% if(!currUser){%>
+        <a class="nav-link" href="/signup"><b>Signup</b></a>
+        <a class="nav-link btn btn-outline-danger log" href="/login"><b>Login</b></a>
+        <style>
+          .log:hover {
+            background-color: #fe424d !important;
+            color: white !important;
+          }
+        </style>
+        <%}%>
+          <% if(currUser){%>
+            <a class="nav-link btn btn-outline-danger log" href="/logout">Logout</a>
+            <style>
+              .log:hover {
+                background-color: #fe424d !important;
+                color: white !important;
+              }
+            </style>
+            <%}%>
     </div>
   </div>
 </nav>
