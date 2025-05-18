@@ -25,14 +25,14 @@
                         <br>
                     </div>
                     <div class="div">
-                        <label for="img" class="form-label">Upload New Image</label>
+                        <label for="img" class="form-label mt-2">Upload New Image</label>
                         <input type="file" placeholder="Enter image url" name="listing[image]"
                              class="form-control">
                         <div class="invalid-feedback">Enter a valid url</div><br>
                     </div>
                     <div class="row">
                         <div class="div col-4">
-                            <label for="price" class="form-label">Price</label>
+                            <label for="price" class="form-label">Price (without GST)</label>
                             <input type="number" placeholder="Enter price" name="listing[price]"
                                 value=<%=singledata.price%> class="form-control" required>
                             <div class="invalid-feedback">Enter a valid price</div><br>
@@ -40,7 +40,7 @@
                         <div class="div col-8">
                             <label for="country" class="form-label">Country</label>
                             <input type="text" placeholder="Enter country" name="listing[country]"
-                                value=<%=singledata.country%> class="form-control" required>
+                                value=<%=singledata.country %> class="form-control" required>
                             <div class="invalid-feedback">Enter a valid country</div><br>
                         </div>
                     </div>
