@@ -18,7 +18,7 @@
                 <p class="mb-3">
                     <%= singledata.description %>
                 </p>
-                <p class="mb-1 fs-5 fw-bold">&#8377; <%= singledata.price.toLocaleString("en-IN") %>
+                <p class="mb-1 fs-5 fw-bold">&#8377; <%= (singledata.price * 1.18).toLocaleString("en-IN") %>
                 </p>
                 <p class="mb-0"><i class="bi bi-geo-alt-fill"></i>
                     <%= singledata.location %>
