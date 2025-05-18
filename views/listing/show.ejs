@@ -107,7 +107,8 @@
                         }
 
 
-                        const price = Number("<%= singledata.price %>");
+                        const price0 = Number("<%= singledata.price %>");
+                        const price=(price0*0.18)+price0;
                         const amount = price * nights;
 
 
